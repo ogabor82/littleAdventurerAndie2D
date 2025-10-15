@@ -12,5 +12,6 @@ config_version=5
 
 config/name="littleAdventurerAndie2D"
 config/tags=PackedStringArray("platformer")
+run/main_scene="res://Game/Main.tscn"
 config/features=PackedStringArray("4.2", "Forward Plus")
 config/icon="res://icon.svg"
