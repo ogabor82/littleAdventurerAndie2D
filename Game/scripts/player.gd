@@ -14,6 +14,11 @@ const GRAVITY = 1800.0 # 1800 pixels per second squared
 # Get the gravity from the project settings to be synced with RigidBody nodes.
 # var gravity = ProjectSettings.get_setting("physics/2d/default_gravity")
 
+
+func _ready():
+	GameManager.player = self
+	GameManager.playerOriginalPos = position
+
 func _process(_delta):
 	UpdateAnimation()
 

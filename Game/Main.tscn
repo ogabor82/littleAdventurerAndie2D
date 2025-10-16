@@ -1,8 +1,9 @@
-[gd_scene load_steps=8 format=3 uid="uid://pq43qt7ibol6"]
+[gd_scene load_steps=9 format=3 uid="uid://pq43qt7ibol6"]
 
 [ext_resource type="Texture2D" uid="uid://d0b73wh41e7fq" path="res://Asset/Tilemap/Tilemap_ProjectLittleAdventurerAndie2D.png" id="1_ri28b"]
 [ext_resource type="PackedScene" uid="uid://o7njptk0gyx0" path="res://Game/scenes/player.tscn" id="2_p634m"]
 [ext_resource type="AudioStream" uid="uid://sfhiqo8rpc5b" path="res://Asset/Sound/music/bgmusic.ogg" id="3_f7jd8"]
+[ext_resource type="Script" path="res://Game/scripts/PlayerResetArea.gd" id="4_ule6c"]
 
 [sub_resource type="PhysicsMaterial" id="PhysicsMaterial_sm7l7"]
 friction = 0.0
@@ -623,7 +624,12 @@ autoplay = true
 bus = &"Music"
 
 [node name="Area2D_PlayerResetArea" type="Area2D" parent="."]
+collision_layer = 0
+collision_mask = 2
+script = ExtResource("4_ule6c")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D_PlayerResetArea"]
-position = Vector2(200, 232)
+position = Vector2(200, 264)
 shape = SubResource("RectangleShape2D_20g6o")
+
+[connection signal="body_entered" from="Area2D_PlayerResetArea" to="Area2D_PlayerResetArea" method="_on_body_entered"]
