@@ -1,10 +1,11 @@
-[gd_scene load_steps=10 format=3 uid="uid://pq43qt7ibol6"]
+[gd_scene load_steps=11 format=3 uid="uid://pq43qt7ibol6"]
 
 [ext_resource type="Texture2D" uid="uid://d0b73wh41e7fq" path="res://Asset/Tilemap/Tilemap_ProjectLittleAdventurerAndie2D.png" id="1_ri28b"]
 [ext_resource type="PackedScene" uid="uid://o7njptk0gyx0" path="res://Game/scenes/player.tscn" id="2_p634m"]
 [ext_resource type="AudioStream" uid="uid://sfhiqo8rpc5b" path="res://Asset/Sound/music/bgmusic.ogg" id="3_f7jd8"]
 [ext_resource type="Script" path="res://Game/scripts/PlayerResetArea.gd" id="4_ule6c"]
 [ext_resource type="Texture2D" uid="uid://c5crf2n3al1us" path="res://Asset/Background/05_ProjectLittleAdventurerAndie2D.png" id="5_b6e3p"]
+[ext_resource type="Texture2D" uid="uid://d3thd20kjsxru" path="res://Asset/Background/04_ProjectLittleAdventurerAndie2D.png" id="6_xru74"]
 
 [sub_resource type="PhysicsMaterial" id="PhysicsMaterial_sm7l7"]
 friction = 0.0
@@ -640,6 +641,14 @@ motion_scale = Vector2(0, 0)
 
 [node name="05ProjectLittleAdventurerAndie2d" type="Sprite2D" parent="ParallaxBackground/ParallaxLayer"]
 texture = ExtResource("5_b6e3p")
+centered = false
+
+[node name="ParallaxLayer2" type="ParallaxLayer" parent="ParallaxBackground"]
+motion_scale = Vector2(0.08, 0)
+motion_mirroring = Vector2(960, 0)
+
+[node name="04ProjectLittleAdventurerAndie2d" type="Sprite2D" parent="ParallaxBackground/ParallaxLayer2"]
+texture = ExtResource("6_xru74")
 centered = false
 
 [connection signal="body_entered" from="Area2D_PlayerResetArea" to="Area2D_PlayerResetArea" method="_on_body_entered"]
