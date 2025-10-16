@@ -12,6 +12,8 @@ const GRAVITY = 1800.0 # 1800 pixels per second squared
 # Get the gravity from the project settings to be synced with RigidBody nodes.
 # var gravity = ProjectSettings.get_setting("physics/2d/default_gravity")
 
+func _process(_delta):
+	UpdateAnimation()
 
 func _physics_process(delta):
 	# Add the gravity.
@@ -33,3 +35,15 @@ func _physics_process(delta):
 		velocity.x = 0
 
 	move_and_slide()
+
+func UpdateAnimation():
+	if velocity.x != 0:
+		animated_sprite_2d.flip_h = velocity.x < 0
+
+	if is_on_floor():
+		if abs(velocity.x) > 0.1:
+			animated_sprite_2d.play("run")
+		else:
+			animated_sprite_2d.play("idle")
+	else:
+		animated_sprite_2d.play("jump")
