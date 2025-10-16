@@ -36,6 +36,9 @@ func _physics_process(delta):
 		# velocity.x = move_toward(velocity.x, 0, SPEED)
 		velocity.x = 0
 
+	if Input.is_action_just_pressed("Down") and is_on_floor():
+		position.y += 3
+
 	move_and_slide()
 
 func UpdateAnimation():
