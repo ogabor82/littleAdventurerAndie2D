@@ -1,6 +1,7 @@
-[gd_scene load_steps=13 format=3 uid="uid://o7njptk0gyx0"]
+[gd_scene load_steps=14 format=3 uid="uid://o7njptk0gyx0"]
 
 [ext_resource type="Texture2D" uid="uid://7r47sdo88xbl" path="res://Asset/Animations/Player/Idle.png" id="1_2eyk7"]
+[ext_resource type="Script" path="res://Game/scripts/player.gd" id="1_8vgfg"]
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_a6tgw"]
 radius = 6.0
@@ -77,6 +78,7 @@ animations = [{
 }]
 
 [node name="player" type="CharacterBody2D"]
+script = ExtResource("1_8vgfg")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 position = Vector2(0, -15)
