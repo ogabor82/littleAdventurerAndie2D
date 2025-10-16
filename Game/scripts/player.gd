@@ -9,6 +9,7 @@ const GRAVITY = 1800.0 # 1800 pixels per second squared
 @onready var player = $"."
 @onready var animated_sprite_2d = $AnimatedSprite2D
 @onready var run_sound = $RunSound
+@onready var jump_sound = $JumpSound
 
 # Get the gravity from the project settings to be synced with RigidBody nodes.
 # var gravity = ProjectSettings.get_setting("physics/2d/default_gravity")
@@ -48,5 +49,9 @@ func UpdateAnimation():
 				run_sound.play()
 		else:
 			animated_sprite_2d.play("idle")
+			run_sound.stop()
 	else:
 		animated_sprite_2d.play("jump")
+		if not jump_sound.playing:
+			jump_sound.play()
+		run_sound.stop()

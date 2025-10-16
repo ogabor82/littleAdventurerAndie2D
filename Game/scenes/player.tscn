@@ -1,10 +1,11 @@
-[gd_scene load_steps=36 format=3 uid="uid://o7njptk0gyx0"]
+[gd_scene load_steps=37 format=3 uid="uid://o7njptk0gyx0"]
 
 [ext_resource type="Texture2D" uid="uid://7r47sdo88xbl" path="res://Asset/Animations/Player/Idle.png" id="1_2eyk7"]
 [ext_resource type="Script" path="res://Game/scripts/player.gd" id="1_8vgfg"]
 [ext_resource type="Texture2D" uid="uid://ciwvuva3gem05" path="res://Asset/Animations/Player/Jump.png" id="3_6ff1k"]
 [ext_resource type="Texture2D" uid="uid://o0hfm8553mgi" path="res://Asset/Animations/Player/Run.png" id="4_vrbxn"]
 [ext_resource type="AudioStream" uid="uid://cmnq2r7p3f3o5" path="res://Asset/Sound/fx/run.mp3" id="5_t343d"]
+[ext_resource type="AudioStream" uid="uid://cccpx1dptcq7q" path="res://Asset/Sound/fx/jump.mp3" id="6_wcth7"]
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_a6tgw"]
 radius = 6.0
@@ -244,4 +245,8 @@ drag_horizontal_enabled = true
 
 [node name="RunSound" type="AudioStreamPlayer2D" parent="."]
 stream = ExtResource("5_t343d")
+bus = &"FX"
+
+[node name="JumpSound" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource("6_wcth7")
 bus = &"FX"
