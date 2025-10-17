@@ -17,4 +17,11 @@ func _physics_process(delta):
 
 func _on_body_entered(_body):
 	print("Bullet hit something")
+
+	var vfxToSpawn = preload("res://Game/scenes/vfx_bullet_hit.tscn")
+	var vfxInstance = GameManager.SpawnVFX(vfxToSpawn, global_position)
+
+	if direction == -1:
+		vfxInstance.scale.x = -1
+
 	queue_free()
