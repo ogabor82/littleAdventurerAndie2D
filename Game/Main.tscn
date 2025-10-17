@@ -1,4 +1,4 @@
-[gd_scene load_steps=25 format=3 uid="uid://pq43qt7ibol6"]
+[gd_scene load_steps=32 format=3 uid="uid://pq43qt7ibol6"]
 
 [ext_resource type="Texture2D" uid="uid://d0b73wh41e7fq" path="res://Asset/Tilemap/Tilemap_ProjectLittleAdventurerAndie2D.png" id="1_ri28b"]
 [ext_resource type="PackedScene" uid="uid://o7njptk0gyx0" path="res://Game/scenes/player.tscn" id="2_p634m"]
@@ -10,6 +10,7 @@
 [ext_resource type="Texture2D" uid="uid://bvqhbt0cx4c0s" path="res://Asset/Background/02_ProjectLittleAdventurerAndie2D.png" id="8_jqocj"]
 [ext_resource type="Texture2D" uid="uid://daukrp4yc3oyg" path="res://Asset/Background/01_ProjectLittleAdventurerAndie2D.png" id="9_7iunh"]
 [ext_resource type="Texture2D" uid="uid://dbywbp6gxfvlo" path="res://Asset/Background/00_ProjectLittleAdventurerAndie2D.png" id="10_5k2p7"]
+[ext_resource type="Texture2D" uid="uid://duwu5c3lx0yiv" path="res://Asset/Background/Particles_ProjectLittleAdventurerAndie2D.png" id="11_b3ote"]
 
 [sub_resource type="PhysicsMaterial" id="PhysicsMaterial_sm7l7"]
 friction = 0.0
@@ -687,6 +688,49 @@ animations = [{
 "speed": 5.0
 }]
 
+[sub_resource type="AtlasTexture" id="AtlasTexture_730b5"]
+atlas = ExtResource("11_b3ote")
+region = Rect2(0, 0, 960, 590)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_70vj2"]
+atlas = ExtResource("11_b3ote")
+region = Rect2(960, 0, 960, 590)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_ebx6d"]
+atlas = ExtResource("11_b3ote")
+region = Rect2(1920, 0, 960, 590)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_j421n"]
+atlas = ExtResource("11_b3ote")
+region = Rect2(2880, 0, 960, 590)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_jvt17"]
+atlas = ExtResource("11_b3ote")
+region = Rect2(3840, 0, 960, 590)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_mqqdl"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_730b5")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_70vj2")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_ebx6d")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_j421n")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_jvt17")
+}],
+"loop": true,
+"name": &"default",
+"speed": 5.0
+}]
+
 [node name="Node2D" type="Node2D"]
 
 [node name="TileMap" type="TileMap" parent="."]
@@ -760,6 +804,18 @@ motion_mirroring = Vector2(945, 745)
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="ParallaxBackground/ParallaxLayer6"]
 sprite_frames = SubResource("SpriteFrames_7p54h")
+autoplay = "default"
+centered = false
+
+[node name="ParallaxBackground2" type="ParallaxBackground" parent="."]
+layer = 100
+
+[node name="ParallaxLayer" type="ParallaxLayer" parent="ParallaxBackground2"]
+motion_scale = Vector2(1.2, 1.1)
+motion_mirroring = Vector2(960, 590)
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="ParallaxBackground2/ParallaxLayer"]
+sprite_frames = SubResource("SpriteFrames_mqqdl")
 autoplay = "default"
 centered = false
 
