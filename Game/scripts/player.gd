@@ -8,6 +8,8 @@ const GRAVITY = 1800.0 # 1800 pixels per second squared
 
 @onready var player = $"."
 @onready var animated_sprite_2d = $AnimatedSprite2D
+@onready var shooting_point = $Shooting_Point
+
 @onready var run_sound = $RunSound
 @onready var jump_sound = $JumpSound
 
@@ -15,6 +17,9 @@ const GRAVITY = 1800.0 # 1800 pixels per second squared
 # var gravity = ProjectSettings.get_setting("physics/2d/default_gravity")
 
 var AirborneLastFrame = false
+
+var isShooting = false
+const SHOOT_DURATION = 0.249
 
 
 func _ready():
@@ -48,6 +53,9 @@ func _physics_process(delta):
 		# velocity.x = move_toward(velocity.x, 0, SPEED)
 		velocity.x = 0
 
+	if Input.is_action_just_pressed("Shoot"):
+		TryToShoot()
+
 	if Input.is_action_just_pressed("Down") and is_on_floor():
 		position.y += 3
 
@@ -63,7 +71,10 @@ func UpdateAnimation():
 			if not run_sound.playing:
 				run_sound.play()
 		else:
-			animated_sprite_2d.play("idle")
+			if isShooting:
+				animated_sprite_2d.play("shoot_stand")
+			else:
+				animated_sprite_2d.play("idle")
 			run_sound.stop()
 	else:
 		animated_sprite_2d.play("jump")
@@ -80,3 +91,22 @@ func PlayJumpUpVFX():
 func PlayLandVFX():
 	var vfxToSpawn = preload("res://Game/scenes/vfx_land.tscn")
 	GameManager.SpawnVFX(vfxToSpawn, global_position)
+
+func Shoot():
+	var bulletToSpawn = preload("res://Game/scenes/bullet.tscn")
+	var bulletInstance = GameManager.SpawnVFX(bulletToSpawn, shooting_point.global_position)
+	
+	if animated_sprite_2d.flip_h:
+		bulletInstance.direction = -1
+	else:
+		bulletInstance.direction = 1
+
+
+func TryToShoot():
+	if isShooting:
+		return
+
+	isShooting = true
+	Shoot()
+	await get_tree().create_timer(SHOOT_DURATION).timeout
+	isShooting = false

@@ -1,9 +1,10 @@
-[gd_scene load_steps=37 format=3 uid="uid://o7njptk0gyx0"]
+[gd_scene load_steps=43 format=3 uid="uid://o7njptk0gyx0"]
 
 [ext_resource type="Texture2D" uid="uid://7r47sdo88xbl" path="res://Asset/Animations/Player/Idle.png" id="1_2eyk7"]
 [ext_resource type="Script" path="res://Game/scripts/player.gd" id="1_8vgfg"]
 [ext_resource type="Texture2D" uid="uid://ciwvuva3gem05" path="res://Asset/Animations/Player/Jump.png" id="3_6ff1k"]
 [ext_resource type="Texture2D" uid="uid://o0hfm8553mgi" path="res://Asset/Animations/Player/Run.png" id="4_vrbxn"]
+[ext_resource type="Texture2D" uid="uid://bht68ghvpbesx" path="res://Asset/Animations/Player/Shoot_Stand.png" id="5_me6dv"]
 [ext_resource type="AudioStream" uid="uid://cmnq2r7p3f3o5" path="res://Asset/Sound/fx/run.mp3" id="5_t343d"]
 [ext_resource type="AudioStream" uid="uid://cccpx1dptcq7q" path="res://Asset/Sound/fx/jump.mp3" id="6_wcth7"]
 
@@ -122,6 +123,26 @@ region = Rect2(448, 0, 64, 64)
 atlas = ExtResource("4_vrbxn")
 region = Rect2(512, 0, 64, 64)
 
+[sub_resource type="AtlasTexture" id="AtlasTexture_xoib1"]
+atlas = ExtResource("5_me6dv")
+region = Rect2(0, 0, 64, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_w5iir"]
+atlas = ExtResource("5_me6dv")
+region = Rect2(64, 0, 64, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_kpgab"]
+atlas = ExtResource("5_me6dv")
+region = Rect2(128, 0, 64, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_koxac"]
+atlas = ExtResource("5_me6dv")
+region = Rect2(192, 0, 64, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_wwbqy"]
+atlas = ExtResource("5_me6dv")
+region = Rect2(256, 0, 64, 64)
+
 [sub_resource type="SpriteFrames" id="SpriteFrames_utrsb"]
 animations = [{
 "frames": [{
@@ -222,6 +243,26 @@ animations = [{
 "loop": false,
 "name": &"run",
 "speed": 10.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_xoib1")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_w5iir")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_kpgab")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_koxac")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_wwbqy")
+}],
+"loop": false,
+"name": &"shoot_stand",
+"speed": 20.0
 }]
 
 [node name="player" type="CharacterBody2D"]
@@ -236,7 +277,7 @@ shape = SubResource("CapsuleShape2D_a6tgw")
 z_index = 100
 position = Vector2(0, -32)
 sprite_frames = SubResource("SpriteFrames_utrsb")
-animation = &"jump"
+animation = &"shoot_stand"
 autoplay = "idle"
 
 [node name="Camera2D" type="Camera2D" parent="."]
@@ -253,3 +294,6 @@ bus = &"FX"
 [node name="JumpSound" type="AudioStreamPlayer2D" parent="."]
 stream = ExtResource("6_wcth7")
 bus = &"FX"
+
+[node name="Shooting_Point" type="Node2D" parent="."]
+position = Vector2(26, -32)
