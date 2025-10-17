@@ -1,4 +1,4 @@
-[gd_scene load_steps=38 format=3 uid="uid://pq43qt7ibol6"]
+[gd_scene load_steps=39 format=3 uid="uid://pq43qt7ibol6"]
 
 [ext_resource type="Texture2D" uid="uid://d0b73wh41e7fq" path="res://Asset/Tilemap/Tilemap_ProjectLittleAdventurerAndie2D.png" id="1_ri28b"]
 [ext_resource type="PackedScene" uid="uid://o7njptk0gyx0" path="res://Game/scenes/player.tscn" id="2_p634m"]
@@ -17,6 +17,7 @@
 [ext_resource type="Texture2D" uid="uid://cm815ygsbywi8" path="res://Asset/Background/CloseBackground/CBG03_ProjectLittleAdventurerAndie2D.png" id="12_oowfv"]
 [ext_resource type="Texture2D" uid="uid://b0k16r0iimvrj" path="res://Asset/Background/CloseBackground/CBG04_ProjectLittleAdventurerAndie2D.png" id="14_3pmlq"]
 [ext_resource type="Texture2D" uid="uid://dnpyjqve0eajr" path="res://Asset/Background/CloseBackground/CBG05_ProjectLittleAdventurerAndie2D.png" id="15_yfenf"]
+[ext_resource type="PackedScene" uid="uid://cpx7cb2c3end1" path="res://Game/scenes/enemy.tscn" id="18_d64yk"]
 
 [sub_resource type="PhysicsMaterial" id="PhysicsMaterial_sm7l7"]
 friction = 0.0
@@ -858,5 +859,8 @@ motion_mirroring = Vector2(920, 0)
 [node name="SunshineProjectLittleAdventurerAndie2d" type="Sprite2D" parent="ParallaxBackground2/ParallaxLayer2"]
 texture = ExtResource("12_loulu")
 centered = false
+
+[node name="Enemy" parent="." instance=ExtResource("18_d64yk")]
+position = Vector2(216, 48)
 
 [connection signal="body_entered" from="Area2D_PlayerResetArea" to="Area2D_PlayerResetArea" method="_on_body_entered"]
