@@ -103,6 +103,10 @@ shape = SubResource("CapsuleShape2D_mxmbu")
 position = Vector2(0, 18)
 target_position = Vector2(-10, 0)
 
+[node name="RayCast2D_Downward" type="RayCast2D" parent="CollisionShape2D"]
+position = Vector2(-6, 22)
+target_position = Vector2(0, 10)
+
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
 position = Vector2(0, -56)
 sprite_frames = SubResource("SpriteFrames_p02f2")
