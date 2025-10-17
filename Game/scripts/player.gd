@@ -14,6 +14,8 @@ const GRAVITY = 1800.0 # 1800 pixels per second squared
 # Get the gravity from the project settings to be synced with RigidBody nodes.
 # var gravity = ProjectSettings.get_setting("physics/2d/default_gravity")
 
+var AirborneLastFrame = false
+
 
 func _ready():
 	GameManager.player = self
@@ -27,6 +29,10 @@ func _physics_process(delta):
 	if not is_on_floor():
 		# velocity.y += gravity * delta
 		velocity.y += GRAVITY * delta
+		AirborneLastFrame = true
+	elif AirborneLastFrame:
+		PlayLandVFX()
+		AirborneLastFrame = false
 
 	# Handle jump.
 	if Input.is_action_just_pressed("Jump") and is_on_floor():
@@ -68,6 +74,9 @@ func UpdateAnimation():
 
 func PlayJumpUpVFX():
 	var vfxToSpawn = preload("res://Game/scenes/vfx_jump_up.tscn")
-	var vfxInstance = vfxToSpawn.instantiate()
-	vfxInstance.global_position = global_position
-	get_tree().get_root().get_node("Root").add_child(vfxInstance)
+	GameManager.SpawnVFX(vfxToSpawn, global_position)
+
+
+func PlayLandVFX():
+	var vfxToSpawn = preload("res://Game/scenes/vfx_land.tscn")
+	GameManager.SpawnVFX(vfxToSpawn, global_position)
