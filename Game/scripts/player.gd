@@ -31,6 +31,7 @@ func _physics_process(delta):
 	# Handle jump.
 	if Input.is_action_just_pressed("Jump") and is_on_floor():
 		velocity.y = JUMP_VELOCITY
+		PlayJumpUpVFX()
 
 	# Get the input direction and handle the movement/deceleration.
 	# As good practice, you should replace UI actions with custom gameplay actions.
@@ -63,3 +64,10 @@ func UpdateAnimation():
 		if not jump_sound.playing:
 			jump_sound.play()
 		run_sound.stop()
+
+
+func PlayJumpUpVFX():
+	var vfxToSpawn = preload("res://Game/scenes/vfx_jump_up.tscn")
+	var vfxInstance = vfxToSpawn.instantiate()
+	vfxInstance.global_position = global_position
+	get_tree().get_root().get_node("Root").add_child(vfxInstance)
