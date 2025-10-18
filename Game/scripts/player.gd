@@ -127,5 +127,15 @@ func TryToShoot():
 
 	isShooting = true
 	Shoot()
+	PlayFireVFX()
 	await get_tree().create_timer(SHOOT_DURATION).timeout
 	isShooting = false
+
+func PlayFireVFX():
+	var vfxToSpawn = preload("res://Game/scenes/vfx_player_fire.tscn")
+	var vfxInstance = GameManager.SpawnVFX(vfxToSpawn, shooting_point.global_position)
+
+	if animated_sprite_2d.flip_h:
+		vfxInstance.scale.x = -1
+	else:
+		vfxInstance.scale.x = 1
