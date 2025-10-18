@@ -15,13 +15,15 @@ func _physics_process(delta):
 	position.x += direction * SPEED * delta
 
 
-func _on_body_entered(_body):
-	print("Bullet hit something")
-
+func _on_body_entered(body):
 	var vfxToSpawn = preload("res://Game/scenes/vfx_bullet_hit.tscn")
 	var vfxInstance = GameManager.SpawnVFX(vfxToSpawn, global_position)
 
 	if direction == -1:
 		vfxInstance.scale.x = -1
+
+	var enemy = body as EnemyController
+	if enemy:
+		enemy.ApplyDamage(DAMAGE)
 
 	queue_free()

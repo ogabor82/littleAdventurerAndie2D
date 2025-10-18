@@ -1,4 +1,5 @@
 extends CharacterBody2D
+class_name EnemyController
 
 
 var SPEED = 50
@@ -29,3 +30,7 @@ func UpdateAnimation():
 		animated_sprite_2d.flip_h = velocity.x > 0
 
 	animated_sprite_2d.play("walk")
+
+func ApplyDamage(damage: int):
+	print("Enemy took ", damage, " damage")
+	# queue_free()
