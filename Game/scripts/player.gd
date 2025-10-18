@@ -67,7 +67,10 @@ func UpdateAnimation():
 
 	if is_on_floor():
 		if abs(velocity.x) > 0.1:
-			animated_sprite_2d.play("run")
+			if isShooting:
+				animated_sprite_2d.play("shoot_run")
+			else:
+				animated_sprite_2d.play("run")
 			if not run_sound.playing:
 				run_sound.play()
 		else:
@@ -81,6 +84,9 @@ func UpdateAnimation():
 		if not jump_sound.playing:
 			jump_sound.play()
 		run_sound.stop()
+
+		if isShooting:
+			animated_sprite_2d.play("shoot_jump")
 
 
 func PlayJumpUpVFX():
