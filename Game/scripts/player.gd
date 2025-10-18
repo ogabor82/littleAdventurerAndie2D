@@ -64,13 +64,26 @@ func _physics_process(delta):
 func UpdateAnimation():
 	if velocity.x != 0:
 		animated_sprite_2d.flip_h = velocity.x < 0
+		if velocity.x < 0:
+			shooting_point.position.x = -26
+		else:
+			shooting_point.position.x = 26
 
 	if is_on_floor():
 		if abs(velocity.x) > 0.1:
+			var playingAnimationFrame = animated_sprite_2d.frame
+			var playingAnimationName = animated_sprite_2d.animation
+
 			if isShooting:
 				animated_sprite_2d.play("shoot_run")
+
+				if playingAnimationName == "run":
+					animated_sprite_2d.frame = playingAnimationFrame
 			else:
-				animated_sprite_2d.play("run")
+				if playingAnimationName == "shoot_run" and animated_sprite_2d.is_playing():
+					pass
+				else:
+					animated_sprite_2d.play("run")
 			if not run_sound.playing:
 				run_sound.play()
 		else:
