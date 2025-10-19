@@ -1,9 +1,10 @@
-[gd_scene load_steps=43 format=3 uid="uid://cpx7cb2c3end1"]
+[gd_scene load_steps=45 format=3 uid="uid://cpx7cb2c3end1"]
 
 [ext_resource type="Texture2D" uid="uid://ds121i7hcwinh" path="res://Asset/Animations/Enemy/Walk.png" id="1_4cjgr"]
 [ext_resource type="Script" path="res://Game/scripts/Enemy.gd" id="1_ogvg2"]
 [ext_resource type="Texture2D" uid="uid://ig6oks8gqj58" path="res://Asset/Animations/Enemy/Die.png" id="2_0a1we"]
 [ext_resource type="Texture2D" uid="uid://cix3tf6we34g6" path="res://Asset/Animations/Enemy/Attack.png" id="2_0kiks"]
+[ext_resource type="Script" path="res://Game/scripts/EnemyDamageCaster.gd" id="5_jwnii"]
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_mxmbu"]
 radius = 6.0
@@ -275,6 +276,9 @@ animations = [{
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_3lvw1"]
 size = Vector2(60, 40)
 
+[sub_resource type="CircleShape2D" id="CircleShape2D_q3cwn"]
+radius = 40.0
+
 [node name="Enemy" type="CharacterBody2D"]
 collision_layer = 4
 script = ExtResource("1_ogvg2")
@@ -296,12 +300,24 @@ position = Vector2(0, -56)
 sprite_frames = SubResource("SpriteFrames_p02f2")
 animation = &"attack"
 
-[node name="Area2D_PlayerDetector" type="Area2D" parent="."]
+[node name="Area2D_Container" type="Node2D" parent="."]
+
+[node name="Area2D_PlayerDetector" type="Area2D" parent="Area2D_Container"]
 collision_layer = 0
 collision_mask = 2
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D_PlayerDetector"]
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D_Container/Area2D_PlayerDetector"]
 position = Vector2(-30, -25)
 shape = SubResource("RectangleShape2D_3lvw1")
 
-[connection signal="body_entered" from="Area2D_PlayerDetector" to="." method="_on_area_2d_player_detector_body_entered"]
+[node name="Area2D_DamageCaster" type="Area2D" parent="Area2D_Container"]
+collision_layer = 0
+collision_mask = 2
+script = ExtResource("5_jwnii")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D_Container/Area2D_DamageCaster"]
+position = Vector2(-30, -25)
+shape = SubResource("CircleShape2D_q3cwn")
+
+[connection signal="body_entered" from="Area2D_Container/Area2D_PlayerDetector" to="." method="_on_area_2d_player_detector_body_entered"]
+[connection signal="body_entered" from="Area2D_Container/Area2D_DamageCaster" to="Area2D_Container/Area2D_DamageCaster" method="_on_body_entered"]

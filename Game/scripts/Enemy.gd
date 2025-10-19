@@ -7,6 +7,7 @@ var direction = -1
 @onready var animated_sprite_2d = $AnimatedSprite2D
 @onready var ray_cast_2d_forward = $CollisionShape2D/RayCast2D_Forward
 @onready var ray_cast_2d_downward = $CollisionShape2D/RayCast2D_Downward
+@onready var area_2d_container = $Area2D_Container
 
 var currentHealth = 100
 var isDead = false
@@ -32,6 +33,7 @@ func _physics_process(_delta):
 		direction = - direction
 		ray_cast_2d_forward.target_position.x = - ray_cast_2d_forward.target_position.x
 		ray_cast_2d_downward.position.x = - ray_cast_2d_downward.position.x
+		area_2d_container.scale.x = - direction
 
 
 	velocity.x = direction * SPEED

@@ -1,4 +1,5 @@
 extends CharacterBody2D
+class_name PlayerController
 
 
 const SPEED = 180.0
@@ -139,3 +140,7 @@ func PlayFireVFX():
 		vfxInstance.scale.x = -1
 	else:
 		vfxInstance.scale.x = 1
+
+
+func ApplyDamage(damage: int):
+	print("Player took ", damage, " damage")
