@@ -41,8 +41,13 @@ var currentState: PlayerState = PlayerState.Normal:
 				animated_sprite_2d.play("die")
 				set_collision_layer_value(2, false)
 
-var currentHealth
+var currentHealth:
+	set(new_value):
+		currentHealth = new_value
+		emit_signal("playerHealthUpdated", currentHealth, MAX_HEALTH)
 const MAX_HEALTH = 100
+
+signal playerHealthUpdated(newValue: int, maxValue: int)
 
 func _ready():
 	currentHealth = MAX_HEALTH
