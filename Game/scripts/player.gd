@@ -22,8 +22,30 @@ var AirborneLastFrame = false
 var isShooting = false
 const SHOOT_DURATION = 0.249
 
+enum PlayerState {
+	Normal, Hurt, Dead
+}
+
+var currentState: PlayerState = PlayerState.Normal:
+	set(new_value):
+		currentState = new_value
+		match currentState:
+			PlayerState.Normal:
+				pass
+			PlayerState.Hurt:
+				if is_on_floor():
+					animated_sprite_2d.play("hit_stand")
+				else:
+					animated_sprite_2d.play("hit_jump")
+			PlayerState.Dead:
+				animated_sprite_2d.play("die")
+				set_collision_layer_value(2, false)
+
+var currentHealth
+const MAX_HEALTH = 100
 
 func _ready():
+	currentHealth = MAX_HEALTH
 	GameManager.player = self
 	GameManager.playerOriginalPos = position
 
@@ -39,6 +61,11 @@ func _physics_process(delta):
 	elif AirborneLastFrame:
 		PlayLandVFX()
 		AirborneLastFrame = false
+
+	if currentState == PlayerState.Hurt or currentState == PlayerState.Dead:
+		velocity.x = 0
+		move_and_slide()
+		return
 
 	# Handle jump.
 	if Input.is_action_just_pressed("Jump") and is_on_floor():
@@ -63,6 +90,14 @@ func _physics_process(delta):
 	move_and_slide()
 
 func UpdateAnimation():
+	if currentState == PlayerState.Dead:
+		return
+	elif currentState == PlayerState.Hurt:
+		if animated_sprite_2d.is_playing():
+			return
+		else:
+			currentState = PlayerState.Normal
+
 	if velocity.x != 0:
 		animated_sprite_2d.flip_h = velocity.x < 0
 		if velocity.x < 0:
@@ -143,4 +178,12 @@ func PlayFireVFX():
 
 
 func ApplyDamage(damage: int):
-	print("Player took ", damage, " damage")
+	if currentState == PlayerState.Dead or currentState == PlayerState.Hurt:
+		return
+
+	currentHealth -= damage
+	currentState = PlayerState.Hurt
+
+	if currentHealth <= 0:
+		currentHealth = 0
+		currentState = PlayerState.Dead
