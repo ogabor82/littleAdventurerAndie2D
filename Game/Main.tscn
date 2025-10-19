@@ -927,19 +927,21 @@ grow_horizontal = 0
 text = "0"
 label_settings = SubResource("LabelSettings_28ygh")
 
-[node name="Coin" parent="." instance=ExtResource("20_urstu")]
+[node name="Coins" type="Node2D" parent="."]
+
+[node name="Coin" parent="Coins" instance=ExtResource("20_urstu")]
 position = Vector2(40, -16)
 
-[node name="Coin2" parent="." instance=ExtResource("20_urstu")]
+[node name="Coin2" parent="Coins" instance=ExtResource("20_urstu")]
 position = Vector2(104, -16)
 
-[node name="Coin3" parent="." instance=ExtResource("20_urstu")]
+[node name="Coin3" parent="Coins" instance=ExtResource("20_urstu")]
 position = Vector2(72, -16)
 
-[node name="Coin4" parent="." instance=ExtResource("20_urstu")]
+[node name="Coin4" parent="Coins" instance=ExtResource("20_urstu")]
 position = Vector2(464, 48)
 
-[node name="Coin5" parent="." instance=ExtResource("20_urstu")]
+[node name="Coin5" parent="Coins" instance=ExtResource("20_urstu")]
 position = Vector2(504, 47)
 
 [connection signal="body_entered" from="Area2D_PlayerResetArea" to="Area2D_PlayerResetArea" method="_on_body_entered"]
