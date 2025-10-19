@@ -192,3 +192,7 @@ func ApplyDamage(damage: int):
 	if currentHealth <= 0:
 		currentHealth = 0
 		currentState = PlayerState.Dead
+
+
+func CollectCoin(value: int):
+	print("Player collected ", value, " coins")
