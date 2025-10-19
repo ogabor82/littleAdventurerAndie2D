@@ -1,4 +1,4 @@
-[gd_scene load_steps=42 format=3 uid="uid://pq43qt7ibol6"]
+[gd_scene load_steps=43 format=3 uid="uid://pq43qt7ibol6"]
 
 [ext_resource type="Texture2D" uid="uid://d0b73wh41e7fq" path="res://Asset/Tilemap/Tilemap_ProjectLittleAdventurerAndie2D.png" id="1_ri28b"]
 [ext_resource type="PackedScene" uid="uid://o7njptk0gyx0" path="res://Game/scenes/player.tscn" id="2_p634m"]
@@ -19,6 +19,7 @@
 [ext_resource type="Texture2D" uid="uid://dnpyjqve0eajr" path="res://Asset/Background/CloseBackground/CBG05_ProjectLittleAdventurerAndie2D.png" id="15_yfenf"]
 [ext_resource type="PackedScene" uid="uid://cpx7cb2c3end1" path="res://Game/scenes/enemy.tscn" id="18_d64yk"]
 [ext_resource type="Script" path="res://Game/scripts/UI_Manager.gd" id="19_f7jmx"]
+[ext_resource type="PackedScene" uid="uid://bs4dodf6mtkjf" path="res://Game/scenes/coin.tscn" id="20_urstu"]
 
 [sub_resource type="PhysicsMaterial" id="PhysicsMaterial_sm7l7"]
 friction = 0.0
@@ -908,5 +909,14 @@ theme_override_styles/background = SubResource("StyleBoxFlat_oni2k")
 theme_override_styles/fill = SubResource("StyleBoxFlat_4g1wx")
 value = 100.0
 show_percentage = false
+
+[node name="Coin" parent="." instance=ExtResource("20_urstu")]
+position = Vector2(40, -16)
+
+[node name="Coin2" parent="." instance=ExtResource("20_urstu")]
+position = Vector2(104, -16)
+
+[node name="Coin3" parent="." instance=ExtResource("20_urstu")]
+position = Vector2(72, -16)
 
 [connection signal="body_entered" from="Area2D_PlayerResetArea" to="Area2D_PlayerResetArea" method="_on_body_entered"]
