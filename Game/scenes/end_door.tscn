@@ -1,6 +1,7 @@
-[gd_scene load_steps=10 format=3 uid="uid://covqnni4l8mmg"]
+[gd_scene load_steps=11 format=3 uid="uid://covqnni4l8mmg"]
 
 [ext_resource type="Texture2D" uid="uid://cl6axb2rt7soo" path="res://Asset/Animations/Other/Door.png" id="1_c0lp2"]
+[ext_resource type="Script" path="res://Game/scripts/EndDoor.gd" id="1_eoiq1"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_foc6p"]
 atlas = ExtResource("1_c0lp2")
@@ -56,6 +57,9 @@ animations = [{
 size = Vector2(20, 128)
 
 [node name="EndDoor" type="Area2D"]
+collision_layer = 0
+collision_mask = 2
+script = ExtResource("1_eoiq1")
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
 position = Vector2(0, -73)
@@ -65,3 +69,5 @@ autoplay = "default"
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 position = Vector2(0, -64)
 shape = SubResource("RectangleShape2D_fcvet")
+
+[connection signal="body_entered" from="." to="." method="_on_body_entered"]

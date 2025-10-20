@@ -18,3 +18,6 @@ func SpawnVFX(vfxToSpawn: Resource, position: Vector2):
 
 func PlayerIsDead():
 	emit_signal("gameOver")
+
+func PlayerEnteredTheEndDoor():
+	print("Player Entered The End Door")

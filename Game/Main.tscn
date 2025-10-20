@@ -1018,7 +1018,8 @@ position = Vector2(464, 48)
 position = Vector2(504, 47)
 
 [node name="EndDoor" parent="." instance=ExtResource("21_hdl0x")]
-position = Vector2(1832, -64)
+z_index = -10
+position = Vector2(1848, -58)
 
 [connection signal="body_entered" from="Area2D_PlayerResetArea" to="Area2D_PlayerResetArea" method="_on_body_entered"]
 [connection signal="pressed" from="CanvasLayer/GameOverScreen/RestartButton" to="CanvasLayer" method="_on_restart_button_pressed"]
