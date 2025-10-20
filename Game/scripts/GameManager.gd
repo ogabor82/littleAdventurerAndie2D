@@ -1,6 +1,6 @@
 extends Node
 
-var player
+var player: PlayerController
 var playerOriginalPos
 
 
@@ -20,4 +20,5 @@ func PlayerIsDead():
 	emit_signal("gameOver")
 
 func PlayerEnteredTheEndDoor():
-	print("Player Entered The End Door")
+	player.SwitchStateToUncontrollable()
+	emit_signal("gameOver")
