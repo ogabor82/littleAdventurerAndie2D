@@ -3,6 +3,9 @@ extends Node
 var player
 var playerOriginalPos
 
+
+signal gameOver()
+
 func PlayerEnteredResetArea():
 	player.position = playerOriginalPos
 
@@ -12,3 +15,6 @@ func SpawnVFX(vfxToSpawn: Resource, position: Vector2):
 	get_tree().get_root().get_node("Root").add_child(vfxInstance)
 
 	return vfxInstance
+
+func PlayerIsDead():
+	emit_signal("gameOver")

@@ -40,6 +40,7 @@ var currentState: PlayerState = PlayerState.Normal:
 			PlayerState.Dead:
 				animated_sprite_2d.play("die")
 				set_collision_layer_value(2, false)
+				GameManager.PlayerIsDead()
 
 var currentHealth:
 	set(new_value):
